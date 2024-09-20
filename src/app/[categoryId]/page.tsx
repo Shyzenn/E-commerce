@@ -1,64 +1,46 @@
-"use client";
-
 import products from "@/lib/data.json";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-
-// Normalize category ids to be lowercase and space-free
-const normalizeCategory = (category: string) =>
-  category.toLowerCase().replace(/\s+/g, "-");
+import { categories } from "@/lib/categories";
 
 const Page = ({ searchParams }: { searchParams: { categoryId: string } }) => {
-  const categories = [
-    { id: "all", name: "All" },
-    { id: "furnitures", name: "Furnitures" },
-    { id: "electronics", name: "Electronics" },
-    { id: "lamps", name: "Lamps" },
-    { id: "kitchen", name: "Kitchen" },
-    { id: "chairs", name: "Chairs" },
-    { id: "skin-care", name: "Skin Care" },
-  ];
+  const selectedCategoryId = (searchParams.categoryId || "all")
+    .toLowerCase()
+    .replace(/\s+/g, "-");
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const selectedCategory = categories.find(
+    (category) => category.id === selectedCategoryId
+  );
+  const selectedCategoryName = selectedCategory ? selectedCategory.name : "All";
 
-  const handleCategoryClick = (categoryId: string) => {
-    setSelectedCategory(categoryId);
-  };
-
-  useEffect(() => {
-    if (selectedCategory === "all") {
-      setFilteredProducts(products);
-    } else {
-      const filtered = products.filter((product) =>
-        product.categories.some(
-          (cat) => normalizeCategory(cat) === selectedCategory
-        )
-      );
-      setFilteredProducts(filtered);
-    }
-  }, [selectedCategory]);
+  const filteredProducts =
+    selectedCategoryId === "all"
+      ? products
+      : products.filter((product) =>
+          product.categories
+            .map((cat) => cat.toLowerCase().replace(/\s+/g, "-"))
+            .includes(selectedCategoryId)
+        );
 
   return (
     <div className="mt-10">
       <h1 className="text-center mb-10 text-2xl font-bold uppercase">
-        {categories.find((cat) => cat.id === selectedCategory)?.name || "All"}
+        {selectedCategoryName}
       </h1>
 
       <div className="flex gap-5 mb-10 justify-center flex-wrap">
         {categories.map((category) => (
-          <button
+          <Link
+            href={`?categoryId=${encodeURIComponent(category.id)}`}
             key={category.id}
-            className={`px-4 py-2 border-2 rounded-lg transition duration-300 ${
-              selectedCategory === category.id
-                ? "bg-black text-white"
-                : "bg-white text-black hover:bg-gray-200"
+            className={`border-2 px-4 ${
+              selectedCategoryId === category.id
+                ? "border-black"
+                : "border-neutral-300"
             }`}
-            onClick={() => handleCategoryClick(normalizeCategory(category.id))}
           >
             {category.name}
-          </button>
+          </Link>
         ))}
       </div>
 
