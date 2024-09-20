@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 const normalizeCategory = (category: string) =>
   category.toLowerCase().replace(/\s+/g, "-");
 
-const Page = ({ searchParams }: { searchParams: { categoryId: string } }) => {
+const Page = () => {
   const categories = [
     { id: "all", name: "All" },
     { id: "furnitures", name: "Furnitures" },

@@ -12,6 +12,9 @@ const NavbarLink = () => {
         <Link href="/category?=all" className=" hover:underline">
           Categories
         </Link>
+        <Link href="/contact" className=" hover:underline">
+          Contact
+        </Link>
       </div>
       <div className=" flex items-center gap-8 justify-center ml-5">
         <CartContent />
