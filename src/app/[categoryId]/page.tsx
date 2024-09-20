@@ -1,7 +1,16 @@
 import products from "@/lib/data.json";
 import Image from "next/image";
 import Link from "next/link";
-import { categories } from "@/lib/categories";
+
+export const categories = [
+  { id: "all", name: "All" },
+  { id: "furnitures", name: "Furnitures" },
+  { id: "electronics", name: "Electronics" },
+  { id: "lamps", name: "Lamps" },
+  { id: "kitchen", name: "Kitchen" },
+  { id: "chairs", name: "Chairs" },
+  { id: "skin-care", name: "Skin Care" },
+];
 
 const Page = ({ searchParams }: { searchParams: { categoryId: string } }) => {
   const selectedCategoryId = (searchParams.categoryId || "all")
@@ -9,7 +18,7 @@ const Page = ({ searchParams }: { searchParams: { categoryId: string } }) => {
     .replace(/\s+/g, "-");
 
   const selectedCategory = categories.find(
-    (category) => category.id === selectedCategoryId,
+    (category) => category.id === selectedCategoryId
   );
   const selectedCategoryName = selectedCategory ? selectedCategory.name : "All";
 
@@ -19,7 +28,7 @@ const Page = ({ searchParams }: { searchParams: { categoryId: string } }) => {
       : products.filter((product) =>
           product.categories
             .map((cat) => cat.toLowerCase().replace(/\s+/g, "-"))
-            .includes(selectedCategoryId),
+            .includes(selectedCategoryId)
         );
 
   return (
@@ -31,7 +40,7 @@ const Page = ({ searchParams }: { searchParams: { categoryId: string } }) => {
       <div className="flex gap-5 mb-10 justify-center flex-wrap">
         {categories.map((category) => (
           <Link
-            href={`?categoryId=${encodeURIComponent(category.id)}`}
+            href={`?categoryId=${category.id}`}
             key={category.id}
             className={`border-2 px-4 ${
               selectedCategoryId === category.id

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
-import CartIcon from "./CartIcon";
 import CartContent from "./CartContent";
 
 const NavbarLink = () => {
@@ -13,22 +12,8 @@ const NavbarLink = () => {
         <Link href="/category?=all" className=" hover:underline">
           Categories
         </Link>
-        <div className="flex gap-4 mr-7">
-          <Link
-            href="/"
-            className="text-lg border-l border-slate-400 pl-4 hover:underline"
-          >
-            Sign up
-          </Link>
-          <Link
-            href="/categories"
-            className="text-lg border-l border-slate-400 pl-4 hover:underline"
-          >
-            Login
-          </Link>
-        </div>
       </div>
-      <div className=" flex items-center gap-8 justify-center">
+      <div className=" flex items-center gap-8 justify-center ml-5">
         <CartContent />
         <MobileMenu />
       </div>

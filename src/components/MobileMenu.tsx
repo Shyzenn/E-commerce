@@ -39,12 +39,6 @@ const MobileMenu = () => {
         <Link href="/category?=all" onClick={() => setIsOpen(false)}>
           Categories
         </Link>
-        <Link href="/" onClick={() => setIsOpen(false)}>
-          Sign up
-        </Link>
-        <Link href="/" onClick={() => setIsOpen(false)}>
-          Login
-        </Link>
       </div>
     </div>
   );
