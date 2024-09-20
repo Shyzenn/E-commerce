@@ -11,7 +11,7 @@ const ProductSpecs: React.FC<{ product: Product }> = ({ product }) => {
     <div className="w-full flex flex-col mt-16 gap-7 md:flex-row">
       {specs.map((spec, index) => (
         <div key={index} className="bg-stone-200 p-5 md:w-[23rem]">
-          <h2 className="text-2xl font-semibold">Texture:</h2>
+          <h2 className="text-2xl font-semibold">{spec.label}</h2>
           <p>{spec.value}</p>
         </div>
       ))}

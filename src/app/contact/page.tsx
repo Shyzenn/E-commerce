@@ -63,7 +63,7 @@ const page = () => {
             className="bg-stone-100 w-full p-2 mt-1"
           ></textarea>
         </div>
-        <button className="mt-10 bg-black text-white w-[40%] py-2 rounded-md">
+        <button className="mt-10 bg-black text-white w-[4   0%] py-2 rounded-md">
           Send message
         </button>
       </form>
